@@ -2,7 +2,10 @@ import { Mastra } from "@mastra/core/mastra";
 import { createLogger } from "@mastra/core/logger";
 import { LibSQLStore } from "@mastra/libsql";
 import { phoenixAgent } from "./agents";
-import { OpenInferenceOTLPTraceExporter } from "@arizeai/openinference-mastra";
+import {
+  isOpenInferenceSpan,
+  OpenInferenceOTLPTraceExporter,
+} from "@arizeai/openinference-mastra";
 import { env } from "./env";
 
 export const mastra = new Mastra({
@@ -10,7 +13,6 @@ export const mastra = new Mastra({
     phoenixAgent: await phoenixAgent({
       apiKey: env.PHOENIX_API_KEY,
       apiUrl: env.PHOENIX_API_URL,
-      githubPersonalAccessToken: env.GITHUB_PERSONAL_ACCESS_TOKEN,
     }),
   },
   storage: new LibSQLStore({
@@ -30,6 +32,7 @@ export const mastra = new Mastra({
       exporter: new OpenInferenceOTLPTraceExporter({
         apiKey: env.PHOENIX_API_KEY,
         collectorEndpoint: `${env.PHOENIX_API_URL}/v1/traces`,
+        spanFilter: isOpenInferenceSpan,
       }),
     },
   },
