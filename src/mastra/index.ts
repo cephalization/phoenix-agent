@@ -26,7 +26,6 @@ export const mastra = new Mastra({
   telemetry: {
     enabled: true,
     serviceName: "phoenix-agent",
-    disableLocalExport: false,
     export: {
       type: "custom",
       exporter: new OpenInferenceOTLPTraceExporter({
