@@ -2,7 +2,6 @@ import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { MCPClient } from "@mastra/mcp";
-import { LibSQLStore } from "@mastra/libsql";
 
 const phoenixMcp = ({
   apiKey,
@@ -58,13 +57,7 @@ export const phoenixAgent = async ({
       `,
     model: openai("gpt-4o"),
     tools: { ...mcpTools },
-    defaultGenerateOptions: { telemetry: { isEnabled: true } },
-    defaultStreamOptions: { telemetry: { isEnabled: true } },
     memory: new Memory({
-      storage: new LibSQLStore({
-        // stores telemetry, evals, ... into memory storage, if it needs to persist, change to file:../mastra.db
-        url: ":memory:",
-      }),
       options: {
         lastMessages: 10,
         semanticRecall: false,

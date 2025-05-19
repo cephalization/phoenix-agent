@@ -17,10 +17,10 @@
     "@arizeai/openinference-mastra": "https://pkg.pr.new/Arize-ai/openinference/@arizeai/openinference-mastra@1598",
     "@arizeai/phoenix-client": "^1.0.2",
     "@arizeai/phoenix-mcp": "^2.1.2",
-    "@mastra/core": "^0.9.3",
-    "@mastra/libsql": "^0.0.3",
-    "@mastra/mcp": "^0.4.3",
-    "@mastra/memory": "^0.3.3",
+    "@mastra/core": "^0.9.4",
+    "@mastra/libsql": "^0.0.4",
+    "@mastra/mcp": "^0.5.0",
+    "@mastra/memory": "^0.3.4",
     "zod": "^3.24.3"
   },
   "devDependencies": {
