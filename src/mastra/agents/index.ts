@@ -2,7 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { MCPClient } from "@mastra/mcp";
-
+import { storage } from "../storage";
 const phoenixMcp = ({
   apiKey,
   apiUrl,
@@ -58,6 +58,7 @@ export const phoenixAgent = async ({
     model: openai("gpt-4o"),
     tools: { ...mcpTools },
     memory: new Memory({
+      storage,
       options: {
         lastMessages: 10,
         semanticRecall: false,

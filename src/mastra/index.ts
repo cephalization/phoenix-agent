@@ -5,6 +5,7 @@ import {
   OpenInferenceOTLPTraceExporter,
 } from "@arizeai/openinference-mastra";
 import { env } from "./env";
+import { storage } from "./storage";
 
 export const mastra = new Mastra({
   agents: {
@@ -13,14 +14,17 @@ export const mastra = new Mastra({
       apiUrl: env.PHOENIX_API_URL,
     }),
   },
+  storage,
   telemetry: {
     enabled: true,
     serviceName: "phoenix-agent",
     export: {
       type: "custom",
       exporter: new OpenInferenceOTLPTraceExporter({
-        apiKey: env.PHOENIX_API_KEY,
-        collectorEndpoint: `${env.PHOENIX_API_URL}/v1/traces`,
+        headers: {
+          Authorization: `Bearer ${env.PHOENIX_API_KEY}`,
+        },
+        url: `${env.PHOENIX_API_URL}/v1/traces`,
         spanFilter: isOpenInferenceSpan,
       }),
     },
