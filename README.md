@@ -21,6 +21,9 @@ git clone https://github.com/cephalization/phoenix-agent.git
 
 ```bash
 cd phoenix-agent
+# switch to the correct node version, install nvm first if you don't have it
+nvm use
+# install dependencies
 npm install
 ```
 
